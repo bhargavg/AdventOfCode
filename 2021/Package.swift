@@ -14,7 +14,8 @@ let package = Package(
     targets: [
         .target(
             name: "Day01",
-            dependencies: ["Utilities"]),
+            dependencies: ["Utilities"],
+            exclude: ["README.md"]),
         .testTarget(
             name: "Day01Tests",
             dependencies: ["Day01"]),
