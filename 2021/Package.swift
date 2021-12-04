@@ -16,6 +16,9 @@ let package = Package(
         .library(
             name: "Day03",
             targets: ["Day03"]),
+        .library(
+            name: "Day04",
+            targets: ["Day04"]),
     ],
     targets: [
         .target(
@@ -45,6 +48,14 @@ let package = Package(
         .testTarget(
             name: "Day03Tests",
             dependencies: ["Day03"],
+            resources: [.copy("Inputs.txt")]),
+        .target(
+            name: "Day04",
+            dependencies: ["Utilities"],
+            exclude: ["README.md"]),
+        .testTarget(
+            name: "Day04Tests",
+            dependencies: ["Day04"],
             resources: [.copy("Inputs.txt")]),
     ]
 )
