@@ -3,23 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "AdventOfCode",
-    products: [
-        .library(
-            name: "Utilities",
-            targets: ["Utilities"]),
-        .library(
-            name: "Day01",
-            targets: ["Day01"]),
-        .library(
-            name: "Day02",
-            targets: ["Day02"]),
-        .library(
-            name: "Day03",
-            targets: ["Day03"]),
-        .library(
-            name: "Day04",
-            targets: ["Day04"]),
-    ],
+    products: [],
     targets: [
         .target(
             name: "Utilities"),
@@ -56,6 +40,14 @@ let package = Package(
         .testTarget(
             name: "Day04Tests",
             dependencies: ["Day04"],
+            resources: [.copy("Inputs.txt")]),
+        .target(
+            name: "Day05",
+            dependencies: ["Utilities"],
+            exclude: ["README.md"]),
+        .testTarget(
+            name: "Day05Tests",
+            dependencies: ["Day05"],
             resources: [.copy("Inputs.txt")]),
     ]
 )
