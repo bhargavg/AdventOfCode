@@ -71,5 +71,13 @@ let package = Package(
             name: "Day08Tests",
             dependencies: ["Day08"],
             resources: [.copy("Inputs.txt")]),
+        .target(
+            name: "Day09",
+            dependencies: ["Utilities"],
+            exclude: ["README.md"]),
+        .testTarget(
+            name: "Day09Tests",
+            dependencies: ["Day09"],
+            resources: [.copy("Inputs.txt")]),
     ]
 )
