@@ -1,27 +1,11 @@
 use std::ops::RangeInclusive;
 
-use advent_of_code::Solution;
-
-pub struct Day04 {}
-
-impl Day04 {
-    pub fn new() -> Self {
-        Self {}
-    }
+pub(crate) fn part1(input: &str) -> String {
+    helper(input, is_range_contains_other)
 }
 
-impl Solution for Day04 {
-    fn problem_number(&self) -> i32 {
-        4
-    }
-
-    fn part1(&self, input: &str) -> String {
-        helper(input, is_range_contains_other)
-    }
-
-    fn part2(&self, input: &str) -> String {
-        helper(input, is_range_overlaps_other)
-    }
+pub(crate) fn part2(input: &str) -> String {
+    helper(input, is_range_overlaps_other)
 }
 
 fn helper<F>(input: &str, filter_condition: F) -> String
@@ -71,13 +55,11 @@ mod tests {
 
     #[test]
     fn test_part1_example() {
-        let day04 = Day04::new();
-        assert_eq!(day04.part1(INPUT), "2");
+        assert_eq!(part1(INPUT), "2");
     }
 
     #[test]
     fn test_part2_example() {
-        let day04 = Day04::new();
-        assert_eq!(day04.part2(INPUT), "4");
+        assert_eq!(part2(INPUT), "4");
     }
 }

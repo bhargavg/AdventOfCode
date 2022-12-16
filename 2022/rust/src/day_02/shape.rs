@@ -1,14 +1,14 @@
 use std::cmp::Ordering;
 
 #[derive(Debug, Eq, Clone, Copy)]
-pub enum Shape {
+pub(crate) enum Shape {
     Rock,
     Paper,
     Scissors,
 }
 
 impl Shape {
-    pub fn from(char: &str) -> Shape {
+    pub(crate) fn from(char: &str) -> Shape {
         match char {
             "A" | "X" => Shape::Rock,
             "B" | "Y" => Shape::Paper,

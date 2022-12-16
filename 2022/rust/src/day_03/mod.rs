@@ -1,41 +1,25 @@
 use std::collections::HashSet;
 
-use advent_of_code::Solution;
-
-pub struct Day03 {}
-
-impl Day03 {
-    pub fn new() -> Self {
-        Self {}
-    }
+pub(crate) fn part1(input: &str) -> String {
+    input
+        .lines()
+        .map(split_into_compartments)
+        .map(|compartments| get_common_character(compartments.into_iter()))
+        .map(|char| character_priority(&char))
+        .sum::<u32>()
+        .to_string()
 }
 
-impl Solution for Day03 {
-    fn problem_number(&self) -> i32 {
-        3
-    }
-
-    fn part1(&self, input: &str) -> String {
-        input
-            .lines()
-            .map(split_into_compartments)
-            .map(|compartments| get_common_character(compartments.into_iter()))
-            .map(|char| character_priority(&char))
-            .sum::<u32>()
-            .to_string()
-    }
-
-    fn part2(&self, input: &str) -> String {
-        input
-            .lines()
-            .map(|l| l.to_owned())
-            .collect::<Vec<String>>()
-            .chunks(3)
-            .map(|chunk| get_common_character(chunk.iter().cloned()))
-            .map(|char| character_priority(&char))
-            .sum::<u32>()
-            .to_string()
-    }
+pub(crate) fn part2(input: &str) -> String {
+    input
+        .lines()
+        .map(|l| l.to_owned())
+        .collect::<Vec<String>>()
+        .chunks(3)
+        .map(|chunk| get_common_character(chunk.iter().cloned()))
+        .map(|char| character_priority(&char))
+        .sum::<u32>()
+        .to_string()
 }
 
 fn split_into_compartments(input: &str) -> Vec<String> {
@@ -65,8 +49,6 @@ fn get_common_character(input: impl Iterator<Item = String>) -> char {
 
 #[cfg(test)]
 mod tests {
-    use advent_of_code::Solution;
-
     use super::*;
 
     const INPUT: &str = r"vJrwpWtwJgWrhcsFMMfFFhFp
@@ -79,13 +61,11 @@ CrZsJsPPZsGzwwsLwLmpwMDw
 
     #[test]
     fn test_part_1_example() {
-        let day03 = Day03::new();
-        assert_eq!(day03.part1(INPUT), "157");
+        assert_eq!(part1(INPUT), "157");
     }
 
     #[test]
     fn test_part_2_example() {
-        let day03 = Day03::new();
-        assert_eq!(day03.part2(INPUT), "70");
+        assert_eq!(part2(INPUT), "70");
     }
 }

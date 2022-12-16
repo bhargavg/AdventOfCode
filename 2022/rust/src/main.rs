@@ -1,32 +1,44 @@
-use advent_of_code::Runner;
+mod day_01;
+mod day_02;
+mod day_03;
+mod day_04;
+mod day_05;
+mod day_06;
+mod day_07;
+mod day_08;
+mod day_09;
 
-mod day01;
-use day01::solutions::Day01;
+use clap::Parser;
+use std::{error::Error, fs::read_to_string, path::PathBuf};
 
-mod day02;
-use day02::v1::solutions::Day02;
+type Part = Box<dyn Fn(&str) -> String>;
+type Day = (Part, Part);
 
-mod day03;
-use day03::solutions::Day03;
+#[derive(Parser, Debug)]
+struct Arguments {
+    day: u8,
+    input_file_path: PathBuf,
+}
 
-mod day04;
-use day04::solutions::Day04;
+fn main() -> Result<(), Box<dyn Error>> {
+    let args = Arguments::parse();
+    let input = read_to_string(args.input_file_path)?;
 
-mod day05;
-use day05::solutions::Day05;
+    let sols: Vec<Day> = vec![
+        (Box::new(day_01::part1), Box::new(day_01::part2)),
+        (Box::new(day_02::part1), Box::new(day_02::part2)),
+        (Box::new(day_03::part1), Box::new(day_03::part2)),
+        (Box::new(day_04::part1), Box::new(day_04::part2)),
+        (Box::new(day_05::part1), Box::new(day_05::part2)),
+        (Box::new(day_06::part1), Box::new(day_06::part2)),
+        (Box::new(day_07::part1), Box::new(day_07::part2)),
+        (Box::new(day_08::part1), Box::new(day_08::part2)),
+        (Box::new(day_09::part1), Box::new(day_09::part2)),
+    ];
 
-mod day06;
-use day06::solutions::Day06;
+    let (part1, part2) = &sols[(args.day - 1) as usize];
 
-fn main() {
-    let runner = Runner::new(vec![
-        Box::new(Day01::new()),
-        Box::new(Day02::new()),
-        Box::new(Day03::new()),
-        Box::new(Day04::new()),
-        Box::new(Day05::new()),
-        Box::new(Day06::new()),
-    ]);
+    println!("Part1: {}\nPart2: {}", part1(&input), part2(&input));
 
-    runner.run();
+    Ok(())
 }
